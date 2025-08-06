@@ -50,13 +50,11 @@ app.post("/register", async (req, res) => {
     const userDetails = await newUser.save();
     const token = await generateToken(userDetails);
     const normalizedUser = userDetails.toObject();
-    setTimeout(() => {
-      res.status(201).send({
-        message: "user registered successfully",
-        ...normalizedUser,
-        token,
-      });
-    }, 3000);
+    res.status(201).send({
+      message: "user registered successfully",
+      ...normalizedUser,
+      token,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).send("Error registering user");
